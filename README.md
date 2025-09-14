@@ -1,59 +1,74 @@
-# TaskManager
+TaskManager
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.0.
+This project is a full-stack Task Manager built with Angular 20 (using Signals) on the frontend and Express + Prisma + SQLite on the backend.
 
-## Development server
+It demonstrates modern Angular practices such as Signals for state management, dependency injection, and reliable testing with Playwright.
+
+Development server
 
 To start a local development server, run:
 
-```bash
 ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
+Once the server is running, open your browser and navigate to http://localhost:4200/.
+The application will automatically reload whenever you modify any of the source files.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Backend server
 
-```bash
+The backend lives inside the /backend folder.
+It uses Express + Prisma ORM + SQLite to persist tasks.
+
+To run the backend:
+
+cd backend
+npm install
+node server.js
+
+
+The backend will run at http://localhost:3000/.
+
+Code scaffolding
+
+Angular CLI includes powerful scaffolding tools.
+To generate a new component, run:
+
 ng generate component component-name
-```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
-```bash
-ng generate --help
-```
+For signals-based state management, services are injected using dependency injection, and task state is stored in Signals for reactivity without manual subscriptions.
 
-## Building
+Building
 
-To build the project run:
+To build the project for production, run:
 
-```bash
 ng build
-```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## Running unit tests
+The build artifacts will be stored in the dist/ directory.
+The production build is optimized for performance and can be deployed (e.g., Netlify).
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Running end-to-end tests
 
-```bash
-ng test
-```
+This project uses Playwright for end-to-end (e2e) testing.
 
-## Running end-to-end tests
+To run the tests:
 
-For end-to-end (e2e) testing, run:
+npx playwright test
 
-```bash
-ng e2e
-```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Tests use data-testid attributes for reliable selectors.
 
-## Additional Resources
+Additional Resources
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Angular Signals → Angular Signals Guide
+
+Playwright → Playwright Docs
+
+Prisma ORM → Prisma Docs
+
+Deployment
+
+Frontend → Netlify
+
+Backend → Render
