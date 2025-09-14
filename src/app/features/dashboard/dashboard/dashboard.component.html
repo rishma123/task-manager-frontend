@@ -1,0 +1,12 @@
+<h1 class="dashboard-title">Dashboard</h1>
+
+<div class="dashboard-header">
+  <button mat-raised-button class="logout-btn" (click)="onLogOut()">Log Out</button>
+</div>
+
+<mat-card class="dashboard-card">
+  <mat-card-content>
+    <app-todo-form></app-todo-form>
+    <app-todo-list></app-todo-list>
+  </mat-card-content>
+</mat-card>

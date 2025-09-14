@@ -1,0 +1,86 @@
+<!-- Show todo list only when tasks exist -->
+<div *ngIf="todoService.tasks().length > 0; else emptyState">
+  <h2>Todo List</h2>
+
+  <!-- Stats bar -->
+  <div class="stats-bar" data-testid="stats-bar">
+    <span>Total: {{ todoService.tasks().length }}</span>
+    <span>✅ Completed: {{ todoService.completedTasks().length }}</span>
+    <span>⌛ Pending: {{ todoService.pendingTasks().length }}</span>
+  </div>
+
+  <!-- Filter buttons -->
+  <div class="filter-buttons">
+    <button mat-stroked-button (click)="setFilter('all')" data-testid="filter-all">
+      All
+    </button>
+    <button mat-stroked-button color="primary" (click)="setFilter('completed')" data-testid="filter-completed">
+      Completed
+    </button>
+    <button mat-stroked-button color="accent" (click)="setFilter('pending')" data-testid="filter-pending">
+      Pending
+    </button>
+
+    <!-- Show "Clear Completed" only if at least one task is completed -->
+    <button
+      mat-raised-button
+      color="warn"
+      *ngIf="hasCompletedTasks()"
+      (click)="clearCompleted()"
+      data-testid="clear-completed"
+    >
+      Clear Completed
+    </button>
+  </div>
+
+  <!-- Task list -->
+  <mat-list>
+    <mat-list-item
+      *ngFor="let task of filteredTasks()"
+      [attr.data-testid]="'todo-item-' + task.id"
+    >
+      <!-- Checkbox -->
+      <mat-checkbox
+        [checked]="task.completed"
+        (change)="toggleTask(task)"
+        [attr.data-testid]="'todo-checkbox-' + task.id"
+      ></mat-checkbox>
+
+      <!-- Task text -->
+      <span
+        [class.completed]="task.completed"
+        [attr.data-testid]="'todo-text-' + task.id"
+      >
+        <strong>{{ task.title }}</strong> - {{ task.description }}
+      </span>
+
+      <!-- Spacer pushes icons to right -->
+      <span class="spacer"></span>
+
+      <!-- Edit button -->
+      <button
+        mat-icon-button
+        color="accent"
+        (click)="startEdit(task)"
+        [attr.data-testid]="'edit-btn-' + task.id"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <!-- Delete button -->
+      <button
+        mat-icon-button
+        color="warn"
+        (click)="removeTask(task)"
+        [attr.data-testid]="'delete-btn-' + task.id"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-list>
+</div>
+
+<!-- Empty state -->
+<ng-template #emptyState>
+  <p data-testid="empty-state">No tasks yet. Add one above.</p>
+</ng-template>

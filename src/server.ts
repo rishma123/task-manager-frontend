@@ -36,9 +36,11 @@ app.use(
 );
 
 /**
- * Handle all other requests by rendering the Angular application.
+ * Catch-all: Let Angular SSR handle every other request
+ * This ensures routes like /dashboard, /todos, etc. work on refresh
  */
-app.use((req, res, next) => {
+// Catch-all for client-side routes
+app.get(/.*/, (req, res, next) => {
   angularApp
     .handle(req)
     .then((response) =>
@@ -49,11 +51,11 @@ app.use((req, res, next) => {
 
 /**
  * Start the server if this module is the main entry point.
- * The server listens on the port defined by the `PORT` environment variable, or defaults to 4000.
+ * The server listens on the port defined by the `PORT` env variable, or defaults to 4000.
  */
 if (isMainModule(import.meta.url)) {
   const port = process.env['PORT'] || 4000;
-  app.listen(port, (error) => {
+  app.listen(port, (error?: Error) => {
     if (error) {
       throw error;
     }
@@ -63,6 +65,6 @@ if (isMainModule(import.meta.url)) {
 }
 
 /**
- * Request handler used by the Angular CLI (for dev-server and during build) or Firebase Cloud Functions.
+ * Request handler used by Angular CLI dev-server or hosting platforms (e.g. Firebase)
  */
 export const reqHandler = createNodeRequestHandler(app);

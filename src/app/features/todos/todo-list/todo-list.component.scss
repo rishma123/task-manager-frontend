@@ -1,0 +1,75 @@
+/* Task text */
+.task-text {
+  margin-left: 10px;
+  flex: 1;
+}
+
+/* Completed tasks */
+.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+/* Spacer pushes actions to right */
+.spacer {
+  flex: 1;
+}
+
+/* Task rows */
+mat-list-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  border-radius: 6px;
+
+  &:hover {
+    background-color: #f5f5f5; /* light gray highlight */
+    cursor: pointer;
+  }
+}
+
+
+/* Inline edit form */
+.edit-form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.small-input {
+  width: 150px;
+}
+
+/* Empty state styling */
+.empty-state {
+  margin-top: 15px;
+  font-style: italic;
+  color: #888;
+  text-align: center;
+}
+
+/* Action icons alignment */
+.mat-icon {
+  position: relative;
+  top: 4px;
+}
+
+/* Filter buttons row */
+.filter-buttons {
+  display: flex;
+  gap: 12px;       /* space between buttons */
+  margin-bottom: 16px;
+}
+
+  .stats-bar {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  margin: 12px 0;
+  padding: 8px 12px;
+  background: #f7f7f7;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 14px;
+}
